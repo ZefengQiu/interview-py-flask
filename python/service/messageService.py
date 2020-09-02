@@ -1,7 +1,6 @@
 from flask import request
 from flask import jsonify
 from flask import make_response
-from pprint import pprint
 import json
 import sqlite3
 
@@ -14,13 +13,8 @@ class MessageService:
 	    Return all the messages
 	    """
 
-        with sqlite3.connect(DBPATH) as conn:
-        query = request.get_json().get("query")
-        res = conn.execute(
-            "select id, title from answers where title like ? ", [f"%{query}%"],
-        )
-        answers = [{"id": r[0], "title": r[1]} for r in res]
-        print(query, "--> ")
-        pprint(answers)
-        return jsonify(answers), 200
+    	with sqlite3.connect(DBPATH) as conn:
+		    messages_res = conn.execute("select body from messages")
+		    messages = [m[0] for m in messages_res]
+		    return jsonify(list(messages)), 200
         
