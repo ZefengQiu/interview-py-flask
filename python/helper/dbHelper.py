@@ -7,10 +7,14 @@ class SQLCRUD:
 		except Exception as e:
 			return None
 
-	def read(self, db_connection, query_str):
+	def read(self, db_connection, query_str, query_body=None):
 		try:
-			res = db_connection.execute(query_str)
-			return res
+			if query_body:
+				res = db_connection.execute(query_str, [f"%{query_body}%"],)
+				return res
+			else:
+				res = db_connection.execute(query_str)
+				return res
 		except Exception as e:
 			return None
 

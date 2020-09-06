@@ -10,7 +10,7 @@ if __name__ == "__main__":
 
 	init_routes(app)
 
-	# load all states from db
+	# Load all states from db to memory
 	StateService().get_all_states()
 
 	app.run(debug=True)

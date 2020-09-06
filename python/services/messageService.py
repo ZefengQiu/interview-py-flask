@@ -18,5 +18,6 @@ class MessageService:
 				msg.process_with_state(state_service.all_states)
 				messages.append(msg.string)
 
+		# will update with edge cases for requirement later
 		return jsonify(messages), 200
 

@@ -1,29 +1,24 @@
 from flask import request
 from flask import jsonify
-from flask import make_response
-from pprint import pprint
-import json
-import sqlite3
+from db import get_db_connection
+from helper.dbHelper import SQLCRUD
+from const.constMessage import ErrorMessage
 
-DBPATH = "../database.db"
 
 class SearchService:
 
 	def search(self):
-		"""
-		Search for answers!
+		conn = get_db_connection()
+		if request.get_json() is None:
+			return jsonify(""), 400
 
-		Accepts a 'query' as JSON post, returns the full answer.
+		query_body = request.get_json().get("query")
 
-		curl -d '{"query":"Star Trek"}' -H "Content-Type: application/json" -X POST http://localhost:5000/search
-		"""
+		if query_body is None:
+			return jsonify(ErrorMessage.empty_request_body), 400
 
-		with sqlite3.connect(DBPATH) as conn:
-			query = request.get_json().get("query")
-			res = conn.execute(
-			    "select id, title from answers where title like ? ", [f"%{query}%"],
-			)
-			answers = [{"id": r[0], "title": r[1]} for r in res]
-			print(query, "--> ")
-			pprint(answers)
+		search_res = SQLCRUD().read(conn, "SELECT id, title FROM answers WHERE title like ? ", query_body)
+
+		if search_res:
+			answers = [{"id": r[0], "title": r[1]} for r in search_res]
 			return jsonify(answers), 200
