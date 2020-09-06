@@ -143,7 +143,7 @@ a6 = a(
             [
                 t("You will be assimilated. Resistance is futile."),
                 t(
-                    "We are the Borg. Lower your shields and surrender your ships. We will add your biological and technological distinctiveness to our own. Your culture will adapt to service us. Resistance is futile."
+                    "We are the Borg. Lower your shields and surrender your ships. We will add your biological and technological distinctiveness to our own. Your culture will adapt to services us. Resistance is futile."
                 ),
                 t(
                     "We are the Borg. Your biological and technological distinctiveness will be added to our own. Resistance is futile."

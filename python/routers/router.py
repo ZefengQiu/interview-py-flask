@@ -1,13 +1,13 @@
-from flask import Flask
-from service.messageService import MessageService
-from service.searchService import SearchService
+from services.messageService import MessageService
+from services.searchService import SearchService
+
 
 def init_routes(app):
 
     if app:
 
-        msgService = MessageService()
-        app.add_url_rule('/messages', 'get_all_messages', msgService.get_all_messages, methods=["GET"])
+        msg_service = MessageService()
+        app.add_url_rule('/messages', 'get_all_messages', msg_service.get_all_messages, methods=["GET"])
 
-        searchService = SearchService()
-        app.add_url_rule("/search", 'search', searchService.search, methods=["POST"])
+        search_service = SearchService()
+        app.add_url_rule("/search", 'search', search_service.search, methods=["POST"])
