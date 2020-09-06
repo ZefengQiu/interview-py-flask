@@ -15,22 +15,22 @@ class TestSearch(unittest.TestCase):
         r = search(None)
         self.assertEqual(r.status_code, 400, "A bad request should result in a 400")
 
-  #   def test_no_results(self):
-  #       r = search("Never mind me lalala")
-  #       self.assertEqual([], r.json(), "No search results should be empty")
-  #
-  #   def test_title(self):
-  #       r = search("Picard fact")
-  #       self.assertEqual(
-  #           [{"id": 8, "title": "Not Picard! Not anyone, in fact", "content": []}],
-  #           r.json(),
-  #           "Title search should return results",
-  #       )
-  #
-  #   def test_little_beverly_tables(self):
-  #       r = search("Beverly';DROP\u0009TABLE\u0009blocks;--")
-  #       self.assertEqual([], r.json(), "You should really know better: https://xkcd.com/327/")
-  #
+    def test_no_results(self):
+        r = search("Never mind me lalala")
+        self.assertEqual([], r.json(), "No search results should be empty")
+
+    def test_title(self):
+        r = search("Picard fact")
+        self.assertEqual(
+            [{"id": 8, "title": "Not Picard! Not anyone, in fact", "content": []}],
+            r.json(),
+            "Title search should return results",
+        )
+
+    def test_little_beverly_tables(self):
+        r = search("Beverly';DROP\u0009TABLE\u0009blocks;--")
+        self.assertEqual([], r.json(), "You should really know better: https://xkcd.com/327/")
+
   #   def test_toplevel_content(self):
   #       r = search("enterprise")
   #       self.assertEqual(
