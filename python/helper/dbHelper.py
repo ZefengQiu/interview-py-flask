@@ -10,10 +10,11 @@ class SQLCRUD:
 	def read(self, db_connection, query_str, query_body=None):
 		try:
 			if query_body:
-				res = db_connection.execute(query_str, [f"%{query_body}%"],)
+				# sql injection
+				res = db_connection.execute(query_str, [f"%{query_body}%"],).fetchall()
 				return res
 			else:
-				res = db_connection.execute(query_str)
+				res = db_connection.execute(query_str).fetchall()
 				return res
 		except Exception as e:
 			return None
