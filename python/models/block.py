@@ -7,7 +7,8 @@ class Block:
 		self.content = json.loads(content)
 
 	def search_in_content(self, words):
-		# check all words need to be in the same text or alt-text
+		# check all words need to be in dictionary value,
+		# flatten json which makes searching more easy
 		words = words.split(" ")
 		for c in self.content:
 			flatten_c = self.__flatten_json(c)
@@ -42,7 +43,6 @@ class Block:
 					flatten(a, name + str(i) + '_')
 					i += 1
 			else:
-				# ignore all type
 				out[name[:-1]] = x
 
 		flatten(json_content)

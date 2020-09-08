@@ -5,6 +5,9 @@ from models.block import Block
 
 class BlockService:
 
+	# Make all_blocks a class global var, and get function lazy load
+	# BlockService will init once when calling the search endpoint
+	# dict: {answer_id : block}
 	all_blocks = {}
 
 	def get_all_blocks(self):
