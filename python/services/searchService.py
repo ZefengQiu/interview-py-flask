@@ -23,6 +23,9 @@ class SearchService:
 		content_res = self.__content_search(conn, query_body, block_service)
 		return content_res
 
+	# will probably break title-search and content-search into each of its own class
+	# if knowing more tests cases and information about how to handling edge cases
+	# for now, put them as a private function of search service class
 
 	def __title_search(self, conn, query_body, block_service):
 		search_res = SQLCRUD().read(conn, "SELECT id, title FROM answers WHERE title like ? ", query_body)
